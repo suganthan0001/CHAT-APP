@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import GenderCheck from "./GenderCheck";
+import { Link } from "react-router-dom";
+import useSignup from "../../hooks/useSignup";
 
 function Signup() {
+  const [inputs, setInputs] = useState({
+    fullName: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+  });
+
+  const {loading, signup} = useSignup();
+
+  async function handleSubmit(e){
+    e.preventDefault();
+    signup(inputs);
+  }
+
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="flex flex-col items-center justify-center w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
@@ -9,10 +26,18 @@ function Signup() {
           SIGNUP
         </h1>
 
-        <form action="" className="text-center">
+        <form action="" className="text-center" onSubmit={handleSubmit}>
           <div>
             <label className="input input-bordered flex items-center gap-2 m-5">
-              <input type="text" className="grow" placeholder="Full Name" />
+              <input
+                value={inputs.fullName}
+                onChange={(e) => {
+                  setInputs({ ...inputs, fullName: e.target.value });
+                }}
+                type="text"
+                className="grow"
+                placeholder="Full Name"
+              />
             </label>
 
             <label className="input input-bordered flex items-center gap-2 m-5">
@@ -24,7 +49,15 @@ function Signup() {
               >
                 <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
               </svg>
-              <input type="text" className="grow" placeholder="Username" />
+              <input
+                type="text"
+                value={inputs.username}
+                className="grow"
+                placeholder="Username"
+                onChange={(e) => {
+                  setInputs({ ...inputs, username: e.target.value });
+                }}
+              />
             </label>
 
             <label className="input input-bordered flex items-center gap-2 m-5">
@@ -40,7 +73,15 @@ function Signup() {
                   clipRule="evenodd"
                 />
               </svg>
-              <input type="password" className="grow" placeholder="Password" />
+              <input
+                type="password"
+                value={inputs.password}
+                className="grow"
+                placeholder="Password"
+                onChange={(e) => {
+                  setInputs({ ...inputs, password: e.target.value });
+                }}
+              />
             </label>
 
             <label className="input input-bordered flex items-center gap-2 m-5">
@@ -59,18 +100,25 @@ function Signup() {
               <input
                 type="password"
                 className="grow"
+                value={inputs.confirmPassword}
                 placeholder="Confirm Password"
+                onChange={(e) => {
+                  setInputs({ ...inputs, confirmPassword: e.target.value });
+                }}
               />
             </label>
           </div>
           <div>
-            <GenderCheck />
+            <GenderCheck inputs = {inputs} setInputs = {setInputs}/>
           </div>
 
           <div className="mt-4">
-            <a href="" className="text-sm hover:underline hover:text-white">
+            <Link
+              to="/login"
+              className="text-sm hover:underline hover:text-white"
+            >
               Already have an account?
-            </a>
+            </Link>
           </div>
 
           <button className="btn btn-outline-black btn-success mt-4 ">
