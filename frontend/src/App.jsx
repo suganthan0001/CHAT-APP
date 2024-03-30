@@ -34,6 +34,7 @@ function App() {
           </Routes>
         )}
         <Toaster />
+        <div className="copyrights">Designed and developed by Suganthan S &copy; 2024 </div>
       </div>
     </>
   );
