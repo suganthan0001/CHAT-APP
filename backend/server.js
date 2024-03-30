@@ -6,8 +6,8 @@ import authRoutes from "./routes/auth.routes.js";
 import connectToDB from "./db/connectToMongoDB.js";
 import userRoutes from "./routes/user.routes.js";
 import cors from "cors";
+import { app,server } from './socket/socket.js';
 
-const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
@@ -25,7 +25,7 @@ app.get("/", (req,res)  => {
 })
 
 
-app.listen(port, async () => {
+server.listen(port, async () => {
     console.log(`Server is listening on port ${port}`);
     await connectToDB();
 })
