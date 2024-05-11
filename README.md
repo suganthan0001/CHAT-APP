@@ -25,4 +25,11 @@ This application allows users to engage in real-time chat conversations. It prov
 - Node.js Express
 - Zustand
 
+## PICTURES
+
+![Alt text](frontend/public/s1.png)
+![Alt text](frontend/public/s2.png)
+![Alt text](frontend/public/s3.png)
+![Alt text](frontend/public/s4.png)
+
 ## Hosted on : https://chat-app-270k.onrender.com/
